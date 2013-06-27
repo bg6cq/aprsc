@@ -1275,8 +1275,6 @@ int client_postread(struct worker_t *self, struct client_t *c, int r)
 	return 0;
 }
 
-
-
 /*
  *	handle an event on an fd
  */
