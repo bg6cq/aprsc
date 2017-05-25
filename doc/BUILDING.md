@@ -9,9 +9,9 @@ systems.
 
 aprsc has been built and tested on:
 
-* Ubuntu LTS (12.04, 14.04)
-* Debian 7.0, "wheezy"
-* Debian 8.0, "jessie"
+* Ubuntu LTS (12.04, 14.04, 16.04): i386 and x86_64
+* Debian 7.0, "wheezy": i386 and x86_64
+* Debian 8.0, "jessie": i386 and x86_64
 * Mac OS X 10.8 (Snow Leopard): x86
 * FreeBSD 8.2 and 9.0 on amd64, 7.2 on i386
 * Solaris 11 (SunOS 5.11 11.0 i86pc i386)
@@ -45,12 +45,42 @@ On Linux, aprsc can utilize POSIX capabilities to enable binding low
 library, and compiling against it requires it's development headers
 (package libcap-dev on Debian/Ubuntu).
 
+
+Building a .deb package
+--------------------------
+
+If you're building for a Debian or Ubuntu system, it's generally easiest to
+build a debian package and install it.  It'll make installation easy, since
+you'll get the package scripts to do the environment setup and upgrades for
+you.
+
+Download the latest source tree:
+
+    $ wget http://he.fi/aprsc/down/aprsc-latest.tar.gz
+    
+Extract it:
+
+    $ tar xvfz aprsc-latest.tar.gz
+    
+Go to the newly-created directory and configure the build:
+
+    $ cd aprsc-1.0.0 (or whatever)
+    $ cd src
+    $ ./configure
+    $ make make-deb
+
+As a result you'll get a nice .deb package, which you can install with:
+
+    $ sudo dpkg -i ../aprsc-something.deb
+
+
 Preparing the environment
 ----------------------------
 
 Create user account and group for aprsc. aprsc should be started as root,
 but a non-privileged user account must be provided, so that it can switch to
-that after starting up.
+that after starting up. Doing this is not required if you're installing a
+.deb or .rpm package - the package scripts take care of the setup.
 
 Linux (single command, all parameters are for adduser):
 
@@ -76,6 +106,7 @@ Extract it:
 Go to the newly-created directory and configure the build:
 
     $ cd aprsc-1.0.0 (or whatever)
+    $ cd src
     $ ./configure
 
 At this point the configuration either succeeds or fails. If it fails, it is
